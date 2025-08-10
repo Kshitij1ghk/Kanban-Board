@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <html>
+        <head>
+            <title>
+                Kanban board
+            </title>
+        </head>
+        <body>
+            <h2>Kanban Board</h2>
+            <input id="input-task" placeholder="Yur task here">
+            <button onclick="addtask()">Add task</button>
+            <button onclick="movetask('inprogress')">Move to progress</button>
+            <button onclick="movetask('completed')">move to completed</button>
+            <button onclick="removetask()">Remove Task</button>
+
+            <div class="board">
+                <div id="todo" class="column todo">
+                    <h2>To do</h2>
+                </div>
+                <div id="inprogress" class="column inprogress">
+                    <h2>in progress</h2>
+                </div>
+                <div id="completed" class="column completed">
+                    <h2>completed</h2>
+                </div>
+            </div>
+            <script>
+                function addtask(){
+                    let text=document.getElementById("input-task").value;
+                    if (text==""){
+                        alert("user has not inputed a task")
+                        return;
+                    }
+                    let taskbox=document.createElement("div");
+                    taskbox.className="task"
+                    let checkbox=document.createElement("input");
+                    checkbox.type="checkbox";
+                    let putit=document.createElement("span");
+                    putit.textContent=text;
+                    taskbox.appendChild(checkbox);
+                    taskbox.appendChild(putit);
+                    document.getElementById("todo").appendChild(taskbox);
+                    document.getElementById("input-taask").value="";
+                    
+                }
+                function movetask(targetColumnId){
+                    let selectedTasks=document.querySelectorAll(".task input:checked");
+                    selectedTasks.forEach(function(checkbox){
+                        checkbox.checked=false;
+                        let taskBox=checkbox.parentElement;
+                        document.getElementById(targetColumnId).appendChild(taskBox);
+                    })
+                    }
+                    function removetask(){
+                        let selectedTasks=document.querySelectorAll(".task input:checked");
+                        selectedTasks.forEach(function(checkbox){
+                            let taskBox=checkbox.parentElement;
+                            taskBox.remove();
+                        })
+                    }
+                
+            </script>
+        </body>
+        <style>
+            body {
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                background-color: blueviolet;
+            }
+            .board{
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            .column {
+                flex: 1;
+                padding: 10px;
+                min-height: 300px;
+                border-radius: 10px;
+            }
+            .todo{background-color: aqua;}
+            .inprogress{background-color: bisque;}
+            .completed{background-color: chartreuse;}
+            .task{
+                background-color: white;
+                padding: 5px;
+                margin: 5px;
+                border-radius: 5px;
+                display: felx;
+                align-items: center;
+                gap: 5px;
+            }
+        </style>
+    </html>
+</html>
