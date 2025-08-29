@@ -8,11 +8,11 @@
         </head>
         <body>
             <h2>Kanban Board</h2>
-            <input id="input-task" placeholder="Your task here"><!--text box for the user to type the task-->
+            <input id="input-task" placeholder="Yur task here"><!--text box for the user to type the task-->
             <button onclick="addtask()" id="newtask" >Add task</button><!--button to add task it calls the function-->
-            <button onclick="movetask('inprogress')" id="movprogress" style="display: none;">Move to progress</button><!--moves the task to in progress column-->
-            <button onclick="movetask('completed')" id="movcompleted" style="display: none;">move to completed</button><!--moves the task to completed column-->
-            <button onclick="removetask()" id="removtask" style="display: none;">Remove Task</button><!--button to remove the task-->
+            <button onclick="movetoprogress('inprogress')" id="movprogress" style="display: none;">Move to progress</button><!--moves the task to in progress column-->
+            <button onclick="movetocompleted('completed')" id="movcompleted" style="display: none;">move to completed</button><!--moves the task to completed column-->
+            <button onclick="removetask()" id="removtask" >Remove Task</button><!--button to remove the task-->
 
             <div class="board"><!--container box holding 3 columns side by sidde-->
                 <div id="todo" class="column todo">
@@ -26,15 +26,14 @@
                 </div>
             </div>
             <div class="controls">
+                <div></div>
                 <div>
-                    <button id="movprogress" onclick="movetask('inprogress')">move to progress</button>
+                    <button id="movprogress" onclick="movetoprogress('inprogress')">move to progress</button>
                 </div>
                 <div>
-                    <button id="movcompleted" onclick="movetask('completed')">move to completed</button>
+                    <button id="movcompleted" onclick="movetocompleted('completed')">move to completed</button>
                 </div>
-                <div>
-                    <button id="removtask" onclick="removetask()">Remove task</button>
-                </div>
+                
             </div>
             <script>
                 function addtask(){
@@ -47,8 +46,9 @@
                     taskbox.className="task" //class name is task
                     let checkbox=document.createElement("input");//creating new checkbox input
                     checkbox.type="checkbox";//used to select a task later
-                    let putit=document.createElement("span");//creates a span fills it with whatever user typed
-                    putit.textContent=text;
+                    let putit=document.createElement("input");//creates a input fills it with whatever user typed
+                    putit.type="text";
+                    putit.value=text;//the text typed earlier was stored
                     taskbox.appendChild(checkbox);
                     taskbox.appendChild(putit);//added the chckbox and text span inside the box div
                     document.getElementById("todo").appendChild(taskbox);//adds the finished tax box to the todo column
@@ -56,12 +56,20 @@
                     
                 }
                 //moving tasks 
-                function movetask(targetColumnId){//takes one argument that is which column to move to **
-                    let selectedTasks=document.querySelectorAll(".task input:checked");//finds all checkboxwes that are checked
-                    selectedTasks.forEach(function(checkbox){
+                function movetoprogress(){//takes one argument that is which column to move to **
+                    let todotasks=document.querySelectorAll("#todo .task input:checked");//finds all checkboxwes that are checked
+                    todotasks.forEach(function(checkbox){
                         checkbox.checked=false;//unticks it after moving
                         let taskBox=checkbox.parentElement;//finds the parent div of the check box
-                        document.getElementById(targetColumnId).appendChild(taskBox);//appends this taskbox to the new coulumn that is one of them i 
+                        document.getElementById("inprogress").appendChild(taskBox);//appends this taskbox to the new coulumn that is one of them i 
+                    })
+                    }
+                function movetocompleted(){//takes one argument that is which column to move to **
+                    let completedtasks=document.querySelectorAll("#inprogress .task input:checked");//finds all checkboxwes that are checked
+                    completedtasks.forEach(function(checkbox){
+                        checkbox.checked=false;//unticks it after moving
+                        let taskBox=checkbox.parentElement;//finds the parent div of the check box
+                        document.getElementById("completed").appendChild(taskBox);//appends this taskbox to the new coulumn that is one of them i 
                     })
                     }
                     function removetask(){
@@ -77,7 +85,7 @@
             body {
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 text-align: center;
-                background-color: blueviolet;
+                background-color: rgb(121, 227, 195);
             }
             .board{
                 display: flex;
