@@ -77,16 +77,23 @@
                             document.getElementById("inprogress").appendChild(taskBox);
                             tasks[id].position="inprogress";
                             positions.inprogress.push(id);
+                            let pos=positions[currentposi]
+                            pos.splice(pos.indexOf(id), 1);
+                            console.log(positions);
                         }
                         else if(currentposi==="inprogress"&&targetColumnId==="completed"){
                             document.getElementById("completed").appendChild(taskBox);
                             tasks[id].position="completed";
                             positions.completed.push(id);
+                            let pos=positions[currentposi]
+                            pos.splice(pos.indexOf(id), 1);
+                            console.log(positions)
                         }
                         else if(currentposi==="completed" && targetColumnId==="inprogress"){
-                            document.getElementById("inprogress").appendChild(taskBox);
-                            tasks[id].position="inprogress";
-                            positions.inprogress.push(id);
+                            alert("the tasks cant be moved from completed to in progress")
+                        }
+                        else if(currentposi==="todo"&&targetColumnId==="completed"){
+                            alert("the tasks cant be moved directly from to do to the completed")
                         }
                         checkbox.checked=false;
                     })
