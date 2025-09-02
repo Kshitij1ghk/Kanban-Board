@@ -13,6 +13,7 @@
             <button onclick="movtask('inprogress')" id="movprogress" style="display: none;">Move to progress</button><!--moves the task to in progress column-->
             <button onclick="movtask('completed')" id="movcompleted" style="display: none;">move to completed</button><!--moves the task to completed column-->
             <button onclick="removetask()" id="removtask" >Remove Task</button><!--button to remove the task-->
+            
 
             <div class="board"><!--container box holding 3 columns side by sidde-->
                 <div id="todo" class="column todo">
@@ -52,19 +53,51 @@
                     taskbox.setAttribute("data-id",id);//stpres the task unique id gives a new value to an attribute called data id so it will look like this <div class="task" data-id="task-3"
                     let checkbox=document.createElement("input");//creating new checkbox input
                     checkbox.type="checkbox";//used to select a task later
-                    let putit=document.createElement("input");//creates a input fills it with whatever user typed
-                    putit.type="text";
-                    putit.value=text;//the text typed earlier was stored
+                    let putit=document.createElement("span");//creates a input fills it with whatever user typed 
+                    putit.textContent=text;//the text typed earlier was stored
+                    let editbtn=document.createElement("button");
+                    editbtn.innerText="edit";
+                    editbtn.className="editbtn"
+                    
+                    editbtn.onclick=function(){
+                        edit(putit,editbtn)
+                    }
+                    
                     taskbox.appendChild(checkbox);
                     taskbox.appendChild(putit);//added the chckbox and text span inside the box div
+                    taskbox.appendChild(editbtn);
                     document.getElementById("todo").appendChild(taskbox);
 
-                    tasks[id]={task:text,position:"todo"}; //here task is an object that stores information about every task 
+                    tasks[id]={task:text,position:"todo"}; //here task is an object that stores information about every task **
                     //ex tasks["task-1"]={task:"something" position:todo};
                     positions.todo.push(id);//positions={todod:[task-1],inprogress:[],completed:[]};
                     document.getElementById("input-task").value="";//empties the taskbox in add task 
                     
                 }
+                function edit(span,button){// passes both elements span and the button element  makes function operate only on the particular
+                    //task row
+                    let input=document.createElement("input");
+                    input.type="text";
+                    input.value=span.textContent//copies the span text into input's value
+                    span.replaceWith(input)//replace span node with input node
+                    input.focus()//moves the cursor into new input automatically instead of manually clicking it
+                    button.innerText="save"//changes the name of the button from edit to save
+                    button.onclick=function(){
+                        savebtn(input,button)//calls the savebtn function to make its functionality
+                    }
+                }
+                function savebtn(input,button){//passes element input and button
+                    let span=document.createElement("span");//creates element span
+                    span.textContent=input.value;//copies the input content into span
+                    input.replaceWith(span);//replaces input with span
+                    button.innerText="edit";//changes the name of save to edit
+                    button.onclick=function(){
+                        edit(span,button);//onclicking calls the previous function
+                    }
+                }
+                
+                
+                
                 //moving tasks 
                 function movtask(targetColumnId){//takes one argument that is which column to move to here we take target columnid as parameter
                     let selectedTasks=document.querySelectorAll(".task input:checked");//finds all checkboxwes that are checked
@@ -189,6 +222,13 @@
                 border: none;
                 border-radius: 12px;
                 cursor: pointer;
+            }
+            .editbtn{
+                background-color: yellow;
+                border-radius: 12px;
+                border-color: black;
+                font-family: 'Times New Roman', Times, serif;
+                
             }
         </style>
     </html>
