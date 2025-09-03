@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <html>
+        <head>
+            <link rel="stylesheet" href="style.css">
+            <title>
+                Kanban board   
+            </title>
+
+        </head>
+        <body>
+            <script src="script.js"></script>
+            <h2 id="kanban" onmouseover="mover(this)" onmouseout="mout(this)">Kanban Board</h2>
+            <input id="input-task" placeholder="add your task here"><!--text box for the user to type the task-->
+            <button onclick="addtask()" id="newtask" >Add task</button><!--button to add task it calls the function-->
+            <button onclick="movtask('inprogress')" id="movprogress" style="display: none;">Move to progress</button><!--moves the task to in progress column-->
+            <button onclick="movtask('completed')" id="movcompleted" style="display: none;">move to completed</button><!--moves the task to completed column-->
+            <button onclick="removetask()" id="removtask" >Remove Task</button><!--button to remove the task-->
+            
+
+            <div class="board"><!--container box holding 3 columns side by sidde-->
+                <div id="todo" class="column todo">
+                    <h2>To do</h2>
+                </div>
+                <div id="inprogress" class="column inprogress">
+                    <h2>in Progress</h2>
+                </div>
+                <div id="completed" class="column completed">
+                    <h2>Completed</h2>
+                </div>
+            </div>
+            <div class="controls">
+                <div></div>
+                <div>
+                    <button id="movprogress" onclick="movtask('inprogress')">move to progress</button>
+                </div>
+                <div>
+                    <button id="movcompleted" onclick="movtask('completed')">move to completed</button>
+                </div>
+                
+            </div>
+        </body>
+        
+    </html>
+</html>
