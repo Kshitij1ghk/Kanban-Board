@@ -86,6 +86,8 @@ body {
                 transition: transform 0.8s ease;
                 font-family: 'Times New Roman', Times, serif;
                 color: rgb(255, 248, 248);
+                border: 2px solid black;
+                padding: 7px;
             }
             #movprogress:hover,
             #movcompleted:hover,
@@ -99,6 +101,11 @@ body {
                 color: black;
                 
             }
+            #input-task,
+            #newtask,
+            #removtask{
+                margin: 20px;
+            }
             .editbtn{
                 background: none;
                 border: none;
@@ -106,13 +113,23 @@ body {
                 margin-left: auto;
                 transition: transform 0.3s ease;
                 font-weight: bolder;
+                
             }
             .editbtn:hover{
                 transform:translateY(-3px);
                 cursor: pointer;
             }
             #kanban{
-                font-family: 'Times New Roman', Times, serif;  
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 2.5rem;
+                color: aliceblue;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+                letter-spacing: 2px;
+                border-bottom: 3px solid orange;
+                font-weight: bolder;
+                padding-bottom: 8px;
+                
+
             }
             #todo,
             #inprogress,
@@ -120,6 +137,7 @@ body {
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 display: block;
                 transition:transform 0.5s ease;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7)
             }
             #todo:hover,
             #inprogress:hover,
@@ -133,13 +151,19 @@ body {
                 word-wrap: break-word;/* breaks long words to avoid overflow*/
                 pointer-events: none;
                 text-align: left;
+                max-width: fit-content;
+                overflow-wrap: anywhere;
             }
             
             #input-task{
-                padding: 8px 12px;
+                padding: 6px;
                 font-size: 1rem;
                 width: 200px;
                 border-radius: 8px;
-                border: 3px solid black;
+                border: 2px solid black;      
+            }
+            .input1{
+                overflow-wrap: anywhere;
+                width: 100%;
                 
             }

@@ -37,8 +37,9 @@ let tasks={};//what task and stores those tasks
                 }
                 function edit(span,button){// passes both elements span and the button element  makes function operate only on the particular
                     //task row
-                    let input=document.createElement("input");
+                    let input=document.createElement("textarea");
                     input.type="text";
+                    input.className="input1"
                     input.value=span.textContent//copies the span text into input's value
                     span.replaceWith(input)//replace span node with input node
                     input.focus()//moves the cursor into new input automatically instead of manually clicking it
@@ -99,9 +100,3 @@ let tasks={};//what task and stores those tasks
                             let taskBox=checkbox.parentElement;
                             taskBox.remove();
                     })}
-                    function mover(obj){
-                        obj.innerHTML="Progress Tracker"
-                    }
-                    function mout(obj){
-                        obj.innerHTML="Kanban Board"
-                    }
