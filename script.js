@@ -99,7 +99,6 @@
                     taskbox.appendChild(editbtn);
 
                     document.getElementById(pos).appendChild(taskbox);
-                    
 
                 }
                 function saveToLocal(){
@@ -123,6 +122,12 @@
                     for(let id in tasks){
                         createTaskElement(id,tasks[id].task, tasks[id].position);//loops over every key in tasksobject
                         //and calls createTaskElement which builds dom elemnts and append them into the corrext column on the page
+                    }
+                }
+                function pressEnterOnAddTask(event){
+                    if (event.key==="Enter") {
+                        event.preventDefault()
+                        addtask();
                     }
                 }
 

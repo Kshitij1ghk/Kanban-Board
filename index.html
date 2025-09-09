@@ -10,7 +10,7 @@
         <body>
             <script src="script.js"></script>
             <h2 id="kanban">Kanban Task-Tracking Board</h2>
-            <input id="input-task" placeholder="Add your task here"><!--text box for the user to type the task-->
+            <input id="input-task" placeholder="Add your task here" onkeydown="pressEnterOnAddTask(event)"><!--text box for the user to type the task-->
             <button onclick="addtask()" id="newtask" >Add task</button><!--button to add task it calls the function-->
             
             <button onclick="removetask()" id="removtask" >Remove Task</button><!--button to remove the task-->
